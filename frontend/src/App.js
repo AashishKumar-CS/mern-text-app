@@ -15,7 +15,7 @@ function App() {
 
   const fetchTexts = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/texts');
+      const response = await axios.get('/api/texts');
       setTexts(response.data);
       setSavedCount(response.data.length);
     } catch (error) {
@@ -32,7 +32,7 @@ function App() {
 
   const addText = async (content) => {
     try {
-      await axios.post('http://localhost:5000/api/texts', { content });
+      await axios.post('/api/texts', { content });
       fetchTexts();
       setSavedCount(savedCount + 1);
     } catch (error) {
@@ -51,7 +51,7 @@ function App() {
       return;
     }
     try {
-      await axios.put(`http://localhost:5000/api/texts/${editingId}`, { content: editingContent });
+      await axios.put(`/api/texts/${editingId}`, { content: editingContent });
       fetchTexts();
       setEditingId(null);
       setEditingContent(''); // Clear after save
@@ -68,7 +68,7 @@ function App() {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this text?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/texts/${id}`);
+        await axios.delete(`/api/texts/${id}`);
         fetchTexts();
         setDeletedCount(deletedCount + 1);
         if (editingId === id) {
