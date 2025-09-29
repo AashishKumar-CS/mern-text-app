@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 require('./db');
 
 const app = express();
@@ -7,8 +8,8 @@ app.use((req, res, next) => {
   console.log('Incoming request:', req.method, req.url, req.headers, req.body);
   next();
 });
-app.use(express.json()); // Must be before any routes
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(express.json());
+app.use(cors({ origin: 'https://mern-text-app-frontend.onrender.com' }));
 
 const textRoutes = require('./routes/textRoutes');
 app.use('/api/texts', textRoutes);
